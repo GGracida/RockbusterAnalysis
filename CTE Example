@@ -1,0 +1,33 @@
+## This SQL query containing a CTE finds out how many of the top 5 Rockbuster Video customers are based within each country.
+
+With top_5_customers_cnt (customer_id, first_name, last_name, country, city) as (select A.customer_id,
+B.first_name,
+B.last_name,
+E.country,
+D.city,
+sum (A. amount) as highest_amount_paid
+from payment A
+INNER JOIN customer B on A.customer_id = B.customer_id
+INNER JOIN Address C on B.Address_id = C. Address_id
+INNER JOIN city D on C.city_id = D.city_id
+INNER JOIN Country E on D. country_id = E.country_id
+where city in ('Aurora', 'Acua', 'Citrus Heights', 'Iwaki', 'Ambattur', 'Shanwei', 'So Leopoldo', 'Teboksary') group by A.customer_id,
+B.first_name,
+B.last_name,
+E.country, 
+D.city
+order by highest_amount_paid desc
+limit 5)
+select D.country,
+count (distinct A.customer_id) as all_customer_count, 
+count (top_5_customers_cnt) as top_customer_count
+from customer A
+INNER JOIN address B on A. address_id = B. address_id 
+INNER JOIN city C on B.city_id C.city_id
+INNER JOIN country D on C.country_id = D.country_id
+LEFT JOIN top_5_customers_cnt on A. customer_id = top_5_customers_cnt.customer_id 
+group by D.country
+order by all_customer_count desc
+limit 5
+
+
