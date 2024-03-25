@@ -12,4 +12,4 @@ The data for this project is fabricated and provided by Career Foundry in the pr
 The data was analyzed using a relational database management system and PostgreSQL.
 ## Visualizations
 All visualizations were created in Tableau Public and may be viewed in the attached [Tableau](https://public.tableau.com/app/profile/guillermo.gracida/vizzes)
-Final Project
+
